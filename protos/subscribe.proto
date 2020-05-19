@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package subscribe;
+
+import "timestamp.proto";
+
+message SubscribeRequest
+{
+    repeated string symbol = 1;
+}
+
+message SubscribeResponse
+{
+    string symbol = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    double bid = 3;
+    double ask = 4;
+    double volume = 5;
+}
+
+service StockExchange
+{
+    rpc SubscribeToQuote(stream SubscribeRequest) returns (stream SubscribeResponse)
+    {
+
+    }
+}
